@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1578346586676" clover="3.2.0">
-  <project timestamp="1578346586676" name="All files">
-    <metrics statements="41" coveredstatements="31" conditionals="7" coveredconditionals="1" methods="10" coveredmethods="7" elements="58" coveredelements="39" complexity="0" loc="41" ncloc="41" packages="5" files="6" classes="6"/>
+<coverage generated="1578347438347" clover="3.2.0">
+  <project timestamp="1578347438347" name="All files">
+    <metrics statements="43" coveredstatements="33" conditionals="7" coveredconditionals="1" methods="12" coveredmethods="9" elements="62" coveredelements="43" complexity="0" loc="43" ncloc="43" packages="5" files="6" classes="6"/>
     <package name="lib">
       <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="app.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/app.js">
@@ -46,16 +46,18 @@
       </file>
     </package>
     <package name="lib.routes">
-      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+      <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
       <file name="studios.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/routes/studios.js">
-        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="15" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
       </file>
     </package>
     <package name="lib.utils">

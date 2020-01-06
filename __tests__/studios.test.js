@@ -62,4 +62,21 @@ describe('app routes', () => {
         });
       });
   });
+
+
+  it('gets a studio by id', async() => {
+    const maineStudio = await Studio.create({ 
+      name: 'awesome maine studio' 
+    });
+    return request(app)
+      .get(`/api/v1/studios/${maineStudio.id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: maineStudio.id,
+          id: expect.any(String),
+          name: maineStudio.name
+        });
+        
+      });
+  });
 });
