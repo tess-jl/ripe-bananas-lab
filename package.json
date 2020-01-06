@@ -26,5 +26,16 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.8.5"
-  }
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tess-jl/ripe-bananas-lab.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tess-jl/ripe-bananas-lab/issues"
+  },
+  "homepage": "https://github.com/tess-jl/ripe-bananas-lab#readme"
 }
