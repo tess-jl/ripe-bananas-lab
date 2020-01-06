@@ -74,7 +74,8 @@ describe('app routes', () => {
         expect(res.body).toEqual({
           _id: maineStudio.id,
           id: expect.any(String),
-          name: maineStudio.name
+          name: maineStudio.name, 
+          __v: 0
         });
         
       });

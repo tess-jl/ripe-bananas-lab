@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1578347438347" clover="3.2.0">
-  <project timestamp="1578347438347" name="All files">
-    <metrics statements="43" coveredstatements="33" conditionals="7" coveredconditionals="1" methods="12" coveredmethods="9" elements="62" coveredelements="43" complexity="0" loc="43" ncloc="43" packages="5" files="6" classes="6"/>
+<coverage generated="1578349685824" clover="3.2.0">
+  <project timestamp="1578349685824" name="All files">
+    <metrics statements="47" coveredstatements="37" conditionals="7" coveredconditionals="1" methods="12" coveredmethods="9" elements="66" coveredelements="47" complexity="0" loc="47" ncloc="47" packages="5" files="7" classes="7"/>
     <package name="lib">
       <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="app.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/app.js">
@@ -37,7 +37,14 @@
       </file>
     </package>
     <package name="lib.models">
-      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="Actor.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/models/Actor.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+      </file>
       <file name="Studio.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/models/Studio.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
@@ -57,7 +64,7 @@
         <line num="13" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
-        <line num="24" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
       </file>
     </package>
     <package name="lib.utils">
