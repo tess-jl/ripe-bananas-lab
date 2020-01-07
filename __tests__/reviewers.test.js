@@ -6,6 +6,7 @@ const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
 
 const Reviewer = require('../lib/models/Reviewer');
+const Film = require('../lib/models/Film');
 
 
 describe('reviewer routes', () => {
@@ -60,28 +61,24 @@ describe('reviewer routes', () => {
       });
   });
 
-
-  // it('gets a studio by id', async() => {
-  //   const maineStudio = await Studio.create({ 
-  //     name: 'awesome maine studio', 
-  //     address: {
-  //       country: 'USA'
-  //     } 
-  //   });
+  it('gets a reviewer by id', async() => {
+    const reviewerToGet = await Reviewer.create({    name: 'nameToFind', 
+      company: 'company' 
+    });
       
-  //   return request(app)
-  //     .get(`/api/v1/studios/${maineStudio.id}`)
-  //     .then(res => {
-  //       expect(res.body).toEqual({
-  //         _id: maineStudio.id,
-  //         id: expect.any(String),
-  //         name: maineStudio.name, 
-  //         address: maineStudio.address,
-  //         films: [],
-  //         __v: 0
-  //       });
-  //     });
-  // });
+    return request(app)
+      .get(`/api/v1/reviewers/${reviewerToGet.id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: reviewerToGet.id,
+          id: expect.any(String),
+          name: reviewerToGet.name, 
+          company: reviewerToGet.company,
+          reviews: [],
+          __v: 0
+        });
+      });
+  });
 
   it('updates a reviewer', async() => {
     const reviewer = await Reviewer.create({ 
@@ -102,14 +99,16 @@ describe('reviewer routes', () => {
       });
   });
 
-  it('deletes a reviewer', async() => {
+  //special test for deleting a reviewer ONLY if they have not written any reviews
+  it('deletes a reviewer because they have written no reviews', async() => {
     const reviewerToDelete = await Reviewer.create({ 
       name: 'for deleting', 
-      company: 'company name' 
+      company: 'company name'                            
     });
+    
+    
     return request(app)
-      .delete(`/api/v1/reviewers/${reviewerToDelete._id}`)
-      .send({ name: 'new reviewer name' })
+      .delete(`/api/v1/reviewers/${reviewerToDelete._id}/delete`)
       .then(res => {
         expect(res.body).toEqual({
           _id: reviewerToDelete._id.toString(),
