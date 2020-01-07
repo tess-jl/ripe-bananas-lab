@@ -6,7 +6,9 @@ const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
 
 const Reviewer = require('../lib/models/Reviewer');
+const Studio = require('../lib/models/Studio');
 const Film = require('../lib/models/Film');
+const Review = require('../lib/models/Review');
 
 
 describe('reviewer routes', () => {
@@ -103,9 +105,8 @@ describe('reviewer routes', () => {
   it('deletes a reviewer because they have written no reviews', async() => {
     const reviewerToDelete = await Reviewer.create({ 
       name: 'for deleting', 
-      company: 'company name'                            
+      company: 'company name'                      
     });
-    
     
     return request(app)
       .delete(`/api/v1/reviewers/${reviewerToDelete._id}/delete`)
@@ -116,6 +117,39 @@ describe('reviewer routes', () => {
           name: reviewerToDelete.name, 
           company: reviewerToDelete.company, 
           __v: 0
+        });
+      });
+  });
+
+  it('does not delete a reviewer because they have written a review', async() => {
+    const reviewerToNotDelete = await Reviewer.create({ 
+      name: 'not for deleting', 
+      company: 'company name'                      
+    });
+
+    const studioForReview = await Studio.create({
+      name: 'studioName'
+    });
+
+    const filmForReview = await Film.create({
+      title: 'filmTitle', 
+      studio: studioForReview._id,
+      released: 1994
+    });
+
+    await Review.create({
+      rating: 1, 
+      reviewer: reviewerToNotDelete._id,
+      review: 'eh', 
+      film: filmForReview._id
+    });
+    
+    return request(app)
+      .delete(`/api/v1/reviewers/${reviewerToNotDelete._id}/delete`)
+      .then(res => {
+        expect(res.body).toEqual({
+          message: 'This reviewer has reviews and cannot be deleted', 
+          status: 500
         });
       });
   });
