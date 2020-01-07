@@ -6,6 +6,7 @@ const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
 
 const Studio = require('../lib/models/Studio');
+const Film = require('../lib/models/Film');
 
 describe('app routes', () => {
   beforeAll(() => {
@@ -66,8 +67,12 @@ describe('app routes', () => {
 
   it('gets a studio by id', async() => {
     const maineStudio = await Studio.create({ 
-      name: 'awesome maine studio' 
+      name: 'awesome maine studio', 
+      address: {
+        country: 'USA'
+      } 
     });
+      
     return request(app)
       .get(`/api/v1/studios/${maineStudio.id}`)
       .then(res => {
@@ -75,9 +80,10 @@ describe('app routes', () => {
           _id: maineStudio.id,
           id: expect.any(String),
           name: maineStudio.name, 
+          address: maineStudio.address,
+          films: [],
           __v: 0
         });
-        
       });
   });
 });
