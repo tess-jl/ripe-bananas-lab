@@ -48,7 +48,7 @@ describe('film routes', () => {
   });
 
 
-  it('creates an event', () => {
+  it('creates a film', () => {
     return request(app)
       .post('/api/v1/films')
       .send({
@@ -65,7 +65,7 @@ describe('film routes', () => {
           id: expect.any(String),
           title: 'great title',
           studio: studio._id.toString(),
-          released: expect.any(Number),
+          released: 1994,
           cast: [{
             _id: expect.any(String), 
             actor: actor._id.toString() 
@@ -74,5 +74,23 @@ describe('film routes', () => {
         });
       });
   });
-});
 
+  it('gets all films', () => {
+    return request(app)
+      .get('/api/v1/films')
+      .then(res => {
+        expect(res.body).toEqual([{
+          _id: expect.any(String),
+          id: expect.any(String),
+          title: 'great title',
+          studio: {
+            _id: studio._id.toString(),
+            name: studio.name, 
+            id: studio.id
+          },
+          released: 1994,
+          __v: 0
+        }]);
+      });
+  });
+});
