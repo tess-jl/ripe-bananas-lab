@@ -40,7 +40,7 @@ describe('reviewer routes', () => {
   });
 
   it('gets all reviewers', async() => {
-    const reviwers = await Reviewer.create([
+    const reviewers = await Reviewer.create([
       { name: 'name1', company: 'company1' },
       { name: 'name2', company: 'company2' },
       { name: 'name3', company: 'company3' },
@@ -48,7 +48,7 @@ describe('reviewer routes', () => {
     return request(app)
       .get('/api/v1/reviewers')
       .then(res => {
-        reviwers.forEach(reviewer => {
+        reviewers.forEach(reviewer => {
           expect(res.body).toContainEqual({
             _id: reviewer._id.toString(),
             id: expect.any(String),
@@ -82,6 +82,25 @@ describe('reviewer routes', () => {
   //       });
   //     });
   // });
+
+  it('updates a reviewer', async() => {
+    const reviewer = await Reviewer.create({ 
+      name: 'old name', 
+      company: 'company name' 
+    });
+    return request(app)
+      .patch(`/api/v1/reviewers/${reviewer._id}`)
+      .send({ name: 'new reviewer name' })
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: reviewer._id.toString(),
+          id: expect.any(String),
+          name: 'new reviewer name', 
+          company: reviewer.company, 
+          __v: 0
+        });
+      });
+  });
 
 
 
