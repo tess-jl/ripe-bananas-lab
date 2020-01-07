@@ -57,20 +57,23 @@ describe('app routes', () => {
   });
 
 
-  // it('gets an actor by id', async() => {
-  //   const maineStudio = await Studio.create({ 
-  //     name: 'awesome maine studio' 
-  //   });
-  //   return request(app)
-  //     .get(`/api/v1/actors/${maineStudio.id}`)
-  //     .then(res => {
-  //       expect(res.body).toEqual({
-  //         _id: maineStudio.id,
-  //         id: expect.any(String),
-  //         name: maineStudio.name, 
-  //         __v: 0
-  //       });
-        
-  //     });
-  // });
+  it('gets an actor by id', async() => {
+    const testActor = await Actor.create({
+      name: 'actor name'
+    }); 
+
+    return request(app)
+      .get(`/api/v1/actors/${testActor.id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: testActor.id,
+          id: expect.any(String),
+          name: testActor.name, 
+          films: [],
+          __v: 0
+        });
+      });
+  });
+
+
 });
