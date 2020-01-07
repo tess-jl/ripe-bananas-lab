@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1578419155889" clover="3.2.0">
-  <project timestamp="1578419155889" name="All files">
-    <metrics statements="86" coveredstatements="74" conditionals="7" coveredconditionals="1" methods="30" coveredmethods="25" elements="123" coveredelements="100" complexity="0" loc="86" ncloc="86" packages="5" files="12" classes="12"/>
+<coverage generated="1578419364101" clover="3.2.0">
+  <project timestamp="1578419364101" name="All files">
+    <metrics statements="86" coveredstatements="76" conditionals="7" coveredconditionals="1" methods="30" coveredmethods="27" elements="123" coveredelements="104" complexity="0" loc="86" ncloc="86" packages="5" files="12" classes="12"/>
     <package name="lib">
       <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="app.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/app.js">
@@ -71,7 +71,7 @@
       </file>
     </package>
     <package name="lib.routes">
-      <metrics statements="36" coveredstatements="34" conditionals="0" coveredconditionals="0" methods="24" coveredmethods="22"/>
+      <metrics statements="36" coveredstatements="36" conditionals="0" coveredconditionals="0" methods="24" coveredmethods="24"/>
       <file name="actors.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/routes/actors.js">
         <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
         <line num="1" count="4" type="stmt"/>
@@ -95,7 +95,7 @@
         <line num="17" count="1" type="stmt"/>
       </file>
       <file name="reviewers.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/routes/reviewers.js">
-        <metrics statements="11" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="6"/>
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="8"/>
         <line num="1" count="4" type="stmt"/>
         <line num="2" count="4" type="stmt"/>
         <line num="4" count="4" type="stmt"/>
@@ -105,8 +105,8 @@
         <line num="15" count="1" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
         <line num="30" count="1" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
       </file>
       <file name="studios.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/routes/studios.js">
         <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>

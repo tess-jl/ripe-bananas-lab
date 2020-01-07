@@ -102,10 +102,24 @@ describe('reviewer routes', () => {
       });
   });
 
-
-
-
-
+  it('deletes a reviewer', async() => {
+    const reviewerToDelete = await Reviewer.create({ 
+      name: 'for deleting', 
+      company: 'company name' 
+    });
+    return request(app)
+      .delete(`/api/v1/reviewers/${reviewerToDelete._id}`)
+      .send({ name: 'new reviewer name' })
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: reviewerToDelete._id.toString(),
+          id: expect.any(String),
+          name: reviewerToDelete.name, 
+          company: reviewerToDelete.company, 
+          __v: 0
+        });
+      });
+  });
 
 
 });
