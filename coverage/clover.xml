@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1578421640918" clover="3.2.0">
-  <project timestamp="1578421640918" name="All files">
+<coverage generated="1578421959952" clover="3.2.0">
+  <project timestamp="1578421959952" name="All files">
     <metrics statements="89" coveredstatements="79" conditionals="7" coveredconditionals="1" methods="30" coveredmethods="27" elements="126" coveredelements="107" complexity="0" loc="89" ncloc="89" packages="5" files="13" classes="13"/>
     <package name="lib">
       <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -53,7 +53,7 @@
         <line num="1" count="5" type="stmt"/>
         <line num="4" count="5" type="stmt"/>
         <line num="14" count="5" type="stmt"/>
-        <line num="37" count="5" type="stmt"/>
+        <line num="39" count="5" type="stmt"/>
       </file>
       <file name="Review.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/models/Review.js">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
