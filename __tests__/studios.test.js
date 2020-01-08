@@ -33,7 +33,6 @@ describe('app routes', () => {
   it('gets all studios', async() => {
     const studios = await getStudios();
     
-    
     return request(app)
       .get('/api/v1/studios')
       .then(res => {
@@ -44,37 +43,15 @@ describe('app routes', () => {
       });
   });
 
-
-  // it('gets a studio by id', async() => {
-  //   const maineStudio = await Studio.create({ 
-  //     name: 'awesome maine studio', 
-  //     address: {
-  //       country: 'USA'
-  //     } 
-  //   });
-
-  //   const maineFilm = await Film.create({ 
-  //     title: 'awesome maine film', 
-  //     studio: maineStudio._id,
-  //     released: 1994, 
-  //     cast: []
-  //   });
+  it('gets a studio by id', async() => {
+    const studio = await getStudio();
       
-  //   return request(app)
-  //     .get(`/api/v1/studios/${maineStudio.id}`)
-  //     .then(res => {
-  //       expect(res.body).toEqual({
-  //         _id: expect.any(String),
-  //         id: expect.any(String),
-  //         name: maineStudio.name, 
-  //         address: maineStudio.address,
-  //         films: [{
-  //           _id: maineFilm._id.toString(),
-  //           id: expect.any(String),
-  //           title: maineFilm.title
-  //         }],
-  //         __v: 0
-  //       });
-  //     });
-  // });
+    return request(app)
+      .get(`/api/v1/studios/${studio.id}`)
+      .then(res => {
+        expect(res.body).toEqual({ ...studio, films: expect.any(Object) });
+      });
+  });
+
+
 });
