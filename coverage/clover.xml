@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1578521917943" clover="3.2.0">
-  <project timestamp="1578521917943" name="All files">
-    <metrics statements="149" coveredstatements="129" conditionals="15" coveredconditionals="1" methods="61" coveredmethods="50" elements="225" coveredelements="180" complexity="0" loc="149" ncloc="149" packages="6" files="16" classes="16"/>
+<coverage generated="1578523853990" clover="3.2.0">
+  <project timestamp="1578523853990" name="All files">
+    <metrics statements="149" coveredstatements="140" conditionals="15" coveredconditionals="8" methods="61" coveredmethods="55" elements="225" coveredelements="203" complexity="0" loc="149" ncloc="149" packages="6" files="16" classes="16"/>
     <package name="lib">
       <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="app.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/app.js">
@@ -35,18 +35,18 @@
         <line num="12" count="4" type="stmt"/>
         <line num="13" count="4" type="stmt"/>
         <line num="16" count="4" type="stmt"/>
-        <line num="17" count="13" type="stmt"/>
+        <line num="17" count="15" type="stmt"/>
         <line num="20" count="4" type="stmt"/>
-        <line num="22" count="13" type="stmt"/>
+        <line num="22" count="15" type="stmt"/>
         <line num="25" count="4" type="stmt"/>
         <line num="26" count="4" type="stmt"/>
-        <line num="29" count="11" type="stmt"/>
+        <line num="29" count="14" type="stmt"/>
         <line num="31" count="4" type="stmt"/>
         <line num="32" count="20" type="stmt"/>
         <line num="35" count="20" type="stmt"/>
-        <line num="36" count="7" type="stmt"/>
-        <line num="37" count="4" type="stmt"/>
-        <line num="41" count="4" type="stmt"/>
+        <line num="37" count="10" type="stmt"/>
+        <line num="38" count="4" type="stmt"/>
+        <line num="42" count="4" type="stmt"/>
       </file>
       <file name="seed.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/helpers/seed.js">
         <metrics statements="16" coveredstatements="16" conditionals="6" coveredconditionals="0" methods="10" coveredmethods="10"/>
@@ -57,29 +57,29 @@
         <line num="6" count="4" type="stmt"/>
         <line num="7" count="4" type="stmt"/>
         <line num="10" count="4" type="cond" truecount="0" falsecount="6"/>
-        <line num="11" count="13" type="stmt"/>
-        <line num="15" count="13" type="stmt"/>
-        <line num="19" count="13" type="stmt"/>
-        <line num="21" count="13" type="stmt"/>
-        <line num="25" count="13" type="stmt"/>
-        <line num="29" count="13" type="stmt"/>
-        <line num="34" count="13" type="stmt"/>
-        <line num="37" count="13" type="stmt"/>
-        <line num="38" count="13" type="stmt"/>
+        <line num="11" count="15" type="stmt"/>
+        <line num="15" count="15" type="stmt"/>
+        <line num="19" count="15" type="stmt"/>
+        <line num="21" count="15" type="stmt"/>
+        <line num="25" count="15" type="stmt"/>
+        <line num="29" count="15" type="stmt"/>
+        <line num="34" count="15" type="stmt"/>
+        <line num="37" count="15" type="stmt"/>
+        <line num="38" count="15" type="stmt"/>
       </file>
     </package>
     <package name="lib.middleware">
-      <metrics statements="12" coveredstatements="3" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="12" coveredstatements="8" conditionals="6" coveredconditionals="5" methods="2" coveredmethods="1"/>
       <file name="error.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/middleware/error.js">
-        <metrics statements="8" coveredstatements="2" conditionals="6" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="8" coveredstatements="7" conditionals="6" coveredconditionals="5" methods="1" coveredmethods="1"/>
         <line num="1" count="5" type="stmt"/>
         <line num="4" count="5" type="stmt"/>
-        <line num="5" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="7" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="5" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="1" type="cond" truecount="3" falsecount="1"/>
         <line num="9" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
       </file>
       <file name="not-found.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/middleware/not-found.js">
         <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -90,7 +90,7 @@
       </file>
     </package>
     <package name="lib.models">
-      <metrics statements="25" coveredstatements="21" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="25" coveredstatements="25" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="Actor.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/models/Actor.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="6" type="stmt"/>
@@ -113,14 +113,14 @@
         <line num="31" count="6" type="stmt"/>
       </file>
       <file name="Reviewer.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/models/Reviewer.js">
-        <metrics statements="9" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="1" count="6" type="stmt"/>
         <line num="3" count="6" type="stmt"/>
         <line num="18" count="6" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="23" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
         <line num="31" count="6" type="stmt"/>
         <line num="37" count="6" type="stmt"/>
       </file>
@@ -133,7 +133,7 @@
       </file>
     </package>
     <package name="lib.routes">
-      <metrics statements="49" coveredstatements="43" conditionals="0" coveredconditionals="0" methods="34" coveredmethods="28"/>
+      <metrics statements="49" coveredstatements="45" conditionals="0" coveredconditionals="0" methods="34" coveredmethods="30"/>
       <file name="actors.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/routes/actors.js">
         <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
         <line num="1" count="5" type="stmt"/>
@@ -159,7 +159,7 @@
         <line num="34" count="1" type="stmt"/>
       </file>
       <file name="reviewers.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/routes/reviewers.js">
-        <metrics statements="13" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="8"/>
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="10"/>
         <line num="1" count="5" type="stmt"/>
         <line num="2" count="5" type="stmt"/>
         <line num="4" count="5" type="stmt"/>
@@ -171,8 +171,8 @@
         <line num="31" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
       </file>
       <file name="reviews.js" path="/Users/Tess/alchemy/career-track/week-04/ripe-bananas-lab/lib/routes/reviews.js">
         <metrics statements="9" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="2"/>

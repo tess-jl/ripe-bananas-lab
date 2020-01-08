@@ -2,7 +2,8 @@ require('dotenv').config();
 
 const request = require('supertest');
 const app = require('../lib/app');
-const { getReviewer, getReviewers } = require('../lib/helpers/data-helpers');
+const { getReviewer, getReviewers, getReview } = require('../lib/helpers/data-helpers');
+const Review = require('../lib/models/Review');
 
 
 describe('reviewer routes', () => {
@@ -57,57 +58,33 @@ describe('reviewer routes', () => {
       });
   });
 
-  // //special test for deleting a reviewer ONLY if they have not written any reviews
-  // it('deletes a reviewer because they have written no reviews', async() => {
-  //   const reviewerToDelete = await Reviewer.create({ 
-  //     name: 'for deleting', 
-  //     company: 'company name'                      
-  //   });
+  //special test for deleting a reviewer ONLY if they have not written any reviews
+  it('deletes a reviewer because they have written no reviews', async() => {
+    const reviewerWithNoReviews = await getReviewer();
+    //delete all reviews by that reviewer
+    await Review.deleteMany({ reviewer: reviewerWithNoReviews._id });
     
-  //   return request(app)
-  //     .delete(`/api/v1/reviewers/${reviewerToDelete._id}/delete`)
-  //     .then(res => {
-  //       expect(res.body).toEqual({
-  //         _id: reviewerToDelete._id.toString(),
-  //         id: expect.any(String),
-  //         name: reviewerToDelete.name, 
-  //         company: reviewerToDelete.company, 
-  //         __v: 0
-  //       });
-  //     });
-  // });
+    return request(app)
+      .delete(`/api/v1/reviewers/${reviewerWithNoReviews._id}/delete`)
+      .then(res => {
+        expect(res.body).toEqual(reviewerWithNoReviews);
+      });
+  });
 
-  // it('does not delete a reviewer because they have written a review', async() => {
-  //   const reviewerToNotDelete = await Reviewer.create({ 
-  //     name: 'not for deleting', 
-  //     company: 'company name'                      
-  //   });
-
-  //   const studioForReview = await Studio.create({
-  //     name: 'studioName'
-  //   });
-
-  //   const filmForReview = await Film.create({
-  //     title: 'filmTitle', 
-  //     studio: studioForReview._id,
-  //     released: 1994
-  //   });
-
-  //   await Review.create({
-  //     rating: 1, 
-  //     reviewer: reviewerToNotDelete._id,
-  //     review: 'eh', 
-  //     film: filmForReview._id
-  //   });
+  it('does not delete a reviewer because they have written a review', async() => {
+    //find a review
+    const review = await getReview();
+    //look up reviewer that made that review, therefore reviewer used in test for sure has a review
+    const reviewerWithReview = await getReviewer({ _id: review.reviewer });
     
-  //   return request(app)
-  //     .delete(`/api/v1/reviewers/${reviewerToNotDelete._id}/delete`)
-  //     .then(res => {
-  //       expect(res.body).toEqual({
-  //         message: 'This reviewer has reviews and cannot be deleted', 
-  //         status: 500
-  //       });
-  //     });
-  // });
+    return request(app)
+      .delete(`/api/v1/reviewers/${reviewerWithReview ._id}/delete`)
+      .then(res => {
+        expect(res.body).toEqual({
+          message: 'This reviewer has reviews and cannot be deleted', 
+          status: 500
+        });
+      });
+  });
 
 });
