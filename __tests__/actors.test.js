@@ -6,7 +6,6 @@ const { getActor, getActors } = require('../lib/helpers/data-helpers');
 
 
 describe('app routes', () => {
-
   it('creates an actor', () => {
     return request(app)
       .post('/api/v1/actors')
