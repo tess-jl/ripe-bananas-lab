@@ -2,23 +2,10 @@ require('dotenv').config();
 
 const request = require('supertest');
 const app = require('../lib/app');
-const connect = require('../lib/utils/connect');
-const mongoose = require('mongoose');
+const { getActor, getActors } = require('../lib/helpers/data-helpers');
 
-const Actor = require('../lib/models/Actor');
 
 describe('app routes', () => {
-  beforeAll(() => {
-    connect();
-  });
-
-  beforeEach(() => {
-    return mongoose.connection.dropDatabase();
-  });
-
-  afterAll(() => {
-    return mongoose.connection.close();
-  });
 
   it('creates an actor', () => {
     return request(app)
@@ -39,14 +26,12 @@ describe('app routes', () => {
   });
 
   it('gets all actors', async() => {
-    const actors = await Actor.create([
-      { name: 'carrie fisher' },
-      { name: 'daisey ridley' }
-    ]);
+    const testActors = await getActors();
+
     return request(app)
       .get('/api/v1/actors')
       .then(res => {
-        actors.forEach(actor => {
+        testActors.forEach(actor => {
           expect(res.body).toContainEqual({
             _id: actor._id.toString(),
             id: expect.any(String),
@@ -57,10 +42,8 @@ describe('app routes', () => {
   });
 
   it('gets an actor by id', async() => {
-    const testActor = await Actor.create({
-      name: 'actor name'
-    }); 
-
+    const testActor = await getActor();
+    
     return request(app)
       .get(`/api/v1/actors/${testActor.id}`)
       .then(res => {
