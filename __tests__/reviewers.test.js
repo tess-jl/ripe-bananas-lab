@@ -46,24 +46,16 @@ describe('reviewer routes', () => {
       });
   });
 
-  // it('updates a reviewer', async() => {
-  //   const reviewer = await Reviewer.create({ 
-  //     name: 'old name', 
-  //     company: 'company name' 
-  //   });
-  //   return request(app)
-  //     .patch(`/api/v1/reviewers/${reviewer._id}`)
-  //     .send({ name: 'new reviewer name' })
-  //     .then(res => {
-  //       expect(res.body).toEqual({
-  //         _id: reviewer._id.toString(),
-  //         id: expect.any(String),
-  //         name: 'new reviewer name', 
-  //         company: reviewer.company, 
-  //         __v: 0
-  //       });
-  //     });
-  // });
+  it('updates a reviewer', async() => {
+    const reviewer = await getReviewer();
+
+    return request(app)
+      .patch(`/api/v1/reviewers/${reviewer._id}`)
+      .send({ name: 'new reviewer name' })
+      .then(res => {
+        expect(res.body).toEqual({...reviewer, name: 'new reviewer name' });
+      });
+  });
 
   // //special test for deleting a reviewer ONLY if they have not written any reviews
   // it('deletes a reviewer because they have written no reviews', async() => {
