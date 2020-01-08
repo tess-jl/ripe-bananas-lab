@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const request = require('supertest');
 const app = require('../lib/app');
-const { getReview, getFilm, getReviewer } = require('../lib/helpers/data-helpers');
+const { getReview, getFilm, getReviewer, getReviews } = require('../lib/helpers/data-helpers');
 const chance = require('chance').Chance();
 const Review = require('../lib/models/Review');
 
@@ -30,6 +30,16 @@ describe('reviewer routes', () => {
           film: testFilm._id.toString(),
           __v: 0
         });
+      });
+  });
+
+  it('gets a all reviews', async() => {
+    const reviews = await getReviews();
+
+    return request(app)
+      .get('/api/v1/reviews')
+      .then(res => {
+        expect(res.body).toEqual(reviews);
       });
   });
 
