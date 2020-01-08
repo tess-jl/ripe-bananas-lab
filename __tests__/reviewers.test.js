@@ -36,52 +36,15 @@ describe('reviewer routes', () => {
       });
   });
 
-  // it('gets a reviewer by id', async() => {
-  //   const reviewerToGet = await Reviewer.create({          name: 'nameToFind', 
-  //     company: 'company' 
-  //   });
-
-  //   const studioToGet = await Studio.create({
-  //     name: 'studioName'
-  //   });
-
-  //   const filmToGet = await Film.create({
-  //     title: 'to get', 
-  //     studio: studioToGet._id, 
-  //     released: 1994, 
-  //     cast: []
-  //   }); 
-
-  //   const reviewToGet = await Review.create({
-  //     rating: 1, 
-  //     reviewer: reviewerToGet._id,
-  //     review: 'eh', 
-  //     film: filmToGet._id
-  //   });
+  it('gets a reviewer by id', async() => {
+    const reviewer = await getReviewer();
       
-  //   return request(app)
-  //     .get(`/api/v1/reviewers/${reviewerToGet._id}`)
-  //     .then(res => {
-  //       expect(res.body).toEqual({
-  //         _id: reviewerToGet._id.toString(),
-  //         id: expect.any(String),
-  //         name: reviewerToGet.name, 
-  //         company: reviewerToGet.company,
-  //         reviews: [{
-  //           _id: reviewToGet._id.toString(), 
-  //           id: expect.any(String),
-  //           rating: reviewToGet.rating, 
-  //           review: reviewToGet.review, 
-  //           film: {
-  //             _id: filmToGet._id.toString(),
-  //             id: expect.any(String),
-  //             title: filmToGet.title
-  //           }
-  //         }],
-  //         __v: 0
-  //       });
-  //     });
-  // });
+    return request(app)
+      .get(`/api/v1/reviewers/${reviewer._id}`)
+      .then(res => {
+        expect(res.body).toEqual({ ...reviewer, reviews: expect.any(Object) });
+      });
+  });
 
   // it('updates a reviewer', async() => {
   //   const reviewer = await Reviewer.create({ 
