@@ -2,28 +2,10 @@ require('dotenv').config();
 
 const request = require('supertest');
 const app = require('../lib/app');
-const connect = require('../lib/utils/connect');
-const mongoose = require('mongoose');
-
-const Reviewer = require('../lib/models/Reviewer');
-const Studio = require('../lib/models/Studio');
-const Film = require('../lib/models/Film');
-const Review = require('../lib/models/Review');
+const { getReviewer, getReviewers } = require('../lib/helpers/data-helpers');
 
 
 describe('reviewer routes', () => {
-  beforeAll(() => {
-    connect();
-  });
-
-  beforeEach(() => {
-    return mongoose.connection.dropDatabase();
-  });
-
-  afterAll(() => {
-    return mongoose.connection.close();
-  });
-
   it('creates a reviewer', () => {
     return request(app)
       .post('/api/v1/reviewers')
@@ -43,143 +25,134 @@ describe('reviewer routes', () => {
   });
 
   it('gets all reviewers', async() => {
-    const reviewers = await Reviewer.create([
-      { name: 'name1', company: 'company1' },
-      { name: 'name2', company: 'company2' },
-      { name: 'name3', company: 'company3' },
-    ]);
+    const reviewers = await getReviewers();
+
     return request(app)
       .get('/api/v1/reviewers')
       .then(res => {
         reviewers.forEach(reviewer => {
-          expect(res.body).toContainEqual({
-            _id: reviewer._id.toString(),
-            id: expect.any(String),
-            name: reviewer.name, 
-            company: reviewer.company, 
-            __v: 0
-          });
+          expect(res.body).toContainEqual(reviewer);
         });
       });
   });
 
-  it('gets a reviewer by id', async() => {
-    const reviewerToGet = await Reviewer.create({          name: 'nameToFind', 
-      company: 'company' 
-    });
+  // it('gets a reviewer by id', async() => {
+  //   const reviewerToGet = await Reviewer.create({          name: 'nameToFind', 
+  //     company: 'company' 
+  //   });
 
-    const studioToGet = await Studio.create({
-      name: 'studioName'
-    });
+  //   const studioToGet = await Studio.create({
+  //     name: 'studioName'
+  //   });
 
-    const filmToGet = await Film.create({
-      title: 'to get', 
-      studio: studioToGet._id, 
-      released: 1994, 
-      cast: []
-    }); 
+  //   const filmToGet = await Film.create({
+  //     title: 'to get', 
+  //     studio: studioToGet._id, 
+  //     released: 1994, 
+  //     cast: []
+  //   }); 
 
-    const reviewToGet = await Review.create({
-      rating: 1, 
-      reviewer: reviewerToGet._id,
-      review: 'eh', 
-      film: filmToGet._id
-    });
+  //   const reviewToGet = await Review.create({
+  //     rating: 1, 
+  //     reviewer: reviewerToGet._id,
+  //     review: 'eh', 
+  //     film: filmToGet._id
+  //   });
       
-    return request(app)
-      .get(`/api/v1/reviewers/${reviewerToGet._id}`)
-      .then(res => {
-        expect(res.body).toEqual({
-          _id: reviewerToGet._id.toString(),
-          id: expect.any(String),
-          name: reviewerToGet.name, 
-          company: reviewerToGet.company,
-          reviews: [{
-            _id: reviewToGet._id.toString(), 
-            id: expect.any(String),
-            rating: reviewToGet.rating, 
-            review: reviewToGet.review, 
-            film: {
-              _id: filmToGet._id.toString(),
-              id: expect.any(String),
-              title: filmToGet.title
-            }
-          }],
-          __v: 0
-        });
-      });
-  });
+  //   return request(app)
+  //     .get(`/api/v1/reviewers/${reviewerToGet._id}`)
+  //     .then(res => {
+  //       expect(res.body).toEqual({
+  //         _id: reviewerToGet._id.toString(),
+  //         id: expect.any(String),
+  //         name: reviewerToGet.name, 
+  //         company: reviewerToGet.company,
+  //         reviews: [{
+  //           _id: reviewToGet._id.toString(), 
+  //           id: expect.any(String),
+  //           rating: reviewToGet.rating, 
+  //           review: reviewToGet.review, 
+  //           film: {
+  //             _id: filmToGet._id.toString(),
+  //             id: expect.any(String),
+  //             title: filmToGet.title
+  //           }
+  //         }],
+  //         __v: 0
+  //       });
+  //     });
+  // });
 
-  it('updates a reviewer', async() => {
-    const reviewer = await Reviewer.create({ 
-      name: 'old name', 
-      company: 'company name' 
-    });
-    return request(app)
-      .patch(`/api/v1/reviewers/${reviewer._id}`)
-      .send({ name: 'new reviewer name' })
-      .then(res => {
-        expect(res.body).toEqual({
-          _id: reviewer._id.toString(),
-          id: expect.any(String),
-          name: 'new reviewer name', 
-          company: reviewer.company, 
-          __v: 0
-        });
-      });
-  });
+  // it('updates a reviewer', async() => {
+  //   const reviewer = await Reviewer.create({ 
+  //     name: 'old name', 
+  //     company: 'company name' 
+  //   });
+  //   return request(app)
+  //     .patch(`/api/v1/reviewers/${reviewer._id}`)
+  //     .send({ name: 'new reviewer name' })
+  //     .then(res => {
+  //       expect(res.body).toEqual({
+  //         _id: reviewer._id.toString(),
+  //         id: expect.any(String),
+  //         name: 'new reviewer name', 
+  //         company: reviewer.company, 
+  //         __v: 0
+  //       });
+  //     });
+  // });
 
-  //special test for deleting a reviewer ONLY if they have not written any reviews
-  it('deletes a reviewer because they have written no reviews', async() => {
-    const reviewerToDelete = await Reviewer.create({ 
-      name: 'for deleting', 
-      company: 'company name'                      
-    });
+  // //special test for deleting a reviewer ONLY if they have not written any reviews
+  // it('deletes a reviewer because they have written no reviews', async() => {
+  //   const reviewerToDelete = await Reviewer.create({ 
+  //     name: 'for deleting', 
+  //     company: 'company name'                      
+  //   });
     
-    return request(app)
-      .delete(`/api/v1/reviewers/${reviewerToDelete._id}/delete`)
-      .then(res => {
-        expect(res.body).toEqual({
-          _id: reviewerToDelete._id.toString(),
-          id: expect.any(String),
-          name: reviewerToDelete.name, 
-          company: reviewerToDelete.company, 
-          __v: 0
-        });
-      });
-  });
+  //   return request(app)
+  //     .delete(`/api/v1/reviewers/${reviewerToDelete._id}/delete`)
+  //     .then(res => {
+  //       expect(res.body).toEqual({
+  //         _id: reviewerToDelete._id.toString(),
+  //         id: expect.any(String),
+  //         name: reviewerToDelete.name, 
+  //         company: reviewerToDelete.company, 
+  //         __v: 0
+  //       });
+  //     });
+  // });
 
-  it('does not delete a reviewer because they have written a review', async() => {
-    const reviewerToNotDelete = await Reviewer.create({ 
-      name: 'not for deleting', 
-      company: 'company name'                      
-    });
+  // it('does not delete a reviewer because they have written a review', async() => {
+  //   const reviewerToNotDelete = await Reviewer.create({ 
+  //     name: 'not for deleting', 
+  //     company: 'company name'                      
+  //   });
 
-    const studioForReview = await Studio.create({
-      name: 'studioName'
-    });
+  //   const studioForReview = await Studio.create({
+  //     name: 'studioName'
+  //   });
 
-    const filmForReview = await Film.create({
-      title: 'filmTitle', 
-      studio: studioForReview._id,
-      released: 1994
-    });
+  //   const filmForReview = await Film.create({
+  //     title: 'filmTitle', 
+  //     studio: studioForReview._id,
+  //     released: 1994
+  //   });
 
-    await Review.create({
-      rating: 1, 
-      reviewer: reviewerToNotDelete._id,
-      review: 'eh', 
-      film: filmForReview._id
-    });
+  //   await Review.create({
+  //     rating: 1, 
+  //     reviewer: reviewerToNotDelete._id,
+  //     review: 'eh', 
+  //     film: filmForReview._id
+  //   });
     
-    return request(app)
-      .delete(`/api/v1/reviewers/${reviewerToNotDelete._id}/delete`)
-      .then(res => {
-        expect(res.body).toEqual({
-          message: 'This reviewer has reviews and cannot be deleted', 
-          status: 500
-        });
-      });
-  });
+  //   return request(app)
+  //     .delete(`/api/v1/reviewers/${reviewerToNotDelete._id}/delete`)
+  //     .then(res => {
+  //       expect(res.body).toEqual({
+  //         message: 'This reviewer has reviews and cannot be deleted', 
+  //         status: 500
+  //       });
+  //     });
+  // });
 
 });
