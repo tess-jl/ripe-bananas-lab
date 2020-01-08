@@ -56,7 +56,6 @@ describe('film routes', () => {
       .get(`/api/v1/films/${film._id}`)
       .then(res => {
         expect(res.body).toEqual({ ...film, reviews: expect.any(Object), studio: expect.any(Object), cast: expect.any(Object) });
-        
       });
   });
 
