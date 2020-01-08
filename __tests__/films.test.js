@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const request = require('supertest');
 const app = require('../lib/app');
-const { getFilm, getFilms, getStudio, getActor, getReview, getReviewer } = require('../lib/helpers/data-helpers');
+const { getFilm, getFilms, getStudio, getActor } = require('../lib/helpers/data-helpers');
 
 
 describe('film routes', () => {
@@ -49,46 +49,15 @@ describe('film routes', () => {
       });
   });
 
-  // it('gets a film by id', () => {
-  //   return request(app)
-  //     .get(`/api/v1/films/${film._id}`)
-  //     .then(res => {
-  //       expect(res.body).toEqual({
-  //         _id: film._id.toString(),
-  //         id: expect.any(String),
-  //         title: film.title,
-  //         released: film.released,
-  //         studio: { 
-  //           _id: studio._id.toString(),
-  //           id: expect.any(String),
-  //           name: studio.name
-  //         },
-  //         cast: [{
-  //           _id: expect.any(String),
-  //           role: film.cast[0].role,
-  //           actor: {
-  //             _id: film.cast[0].actor._id.toString(),
-  //             id: expect.any(String),
-  //             name: actor.name
-  //           }
-  //         }],
-  //         reviews: [{
-  //           _id: review._id.toString(),
-  //           id: expect.any(String),
-  //           rating: review.rating, 
-  //           review: review.review,
-  //           reviewer: {
-  //             _id: reviewer._id.toString(), 
-  //             id: reviewer.id,
-  //             name: reviewer.name
-  //           }
-  //         }],
-  //         __v: 0
-  //       });
-  //     });
-  // });
+  it('gets a film by id', async() => {
+    const film = await getFilm();
 
-
-
+    return request(app)
+      .get(`/api/v1/films/${film._id}`)
+      .then(res => {
+        expect(res.body).toEqual({ ...film, reviews: expect.any(Object), studio: expect.any(Object), cast: expect.any(Object) });
+        
+      });
+  });
 
 });
