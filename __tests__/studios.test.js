@@ -6,7 +6,7 @@ const connect = require('../lib/utils/connect');
 const mongoose = require('mongoose');
 
 const Studio = require('../lib/models/Studio');
-// const Film = require('../lib/models/Film');
+const Film = require('../lib/models/Film');
 
 describe('app routes', () => {
   beforeAll(() => {
@@ -72,16 +72,27 @@ describe('app routes', () => {
         country: 'USA'
       } 
     });
+
+    const maineFilm = await Film.create({ 
+      title: 'awesome maine film', 
+      studio: maineStudio._id,
+      released: 1994, 
+      cast: []
+    });
       
     return request(app)
       .get(`/api/v1/studios/${maineStudio.id}`)
       .then(res => {
         expect(res.body).toEqual({
-          _id: maineStudio.id,
+          _id: expect.any(String),
           id: expect.any(String),
           name: maineStudio.name, 
           address: maineStudio.address,
-          films: [],
+          films: [{
+            _id: maineFilm._id.toString(),
+            id: expect.any(String),
+            title: maineFilm.title
+          }],
           __v: 0
         });
       });
