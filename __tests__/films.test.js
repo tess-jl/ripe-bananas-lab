@@ -42,7 +42,7 @@ describe('film routes', () => {
         studio: studio._id,
         released: 1994,
         cast: [
-          { actor: actor._id }
+          { role: 'roleName', actor: actor._id }
         ]
       });
 
@@ -121,17 +121,28 @@ describe('film routes', () => {
           id: expect.any(String),
           title: film.title,
           released: film.released,
-          studio: studio._id.toString(),
+          studio: { 
+            _id: studio._id.toString(),
+            id: expect.any(String),
+            name: studio.name
+          },
           cast: [{
             _id: expect.any(String),
-            actor: actor._id.toString() 
+            role: film.cast[0].role,
+            actor: {
+              _id: film.cast[0].actor._id.toString(),
+              id: expect.any(String),
+              name: actor.name
+            }
           }],
           reviews: [{
             _id: review._id.toString(),
+            id: expect.any(String),
             rating: review.rating, 
             review: review.review,
             reviewer: {
               _id: reviewer._id.toString(), 
+              id: reviewer.id,
               name: reviewer.name
             }
           }],
