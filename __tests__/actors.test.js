@@ -32,11 +32,8 @@ describe('app routes', () => {
       .get('/api/v1/actors')
       .then(res => {
         testActors.forEach(actor => {
-          expect(res.body).toContainEqual({
-            _id: actor._id.toString(),
-            id: expect.any(String),
-            name: actor.name
-          });
+          delete actor.__v;
+          expect(res.body).toContainEqual(actor);
         });
       });
   });
