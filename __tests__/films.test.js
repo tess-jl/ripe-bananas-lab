@@ -36,24 +36,18 @@ describe('film routes', () => {
       });
   });
 
-  // it('gets all films', () => {
-  //   return request(app)
-  //     .get('/api/v1/films')
-  //     .then(res => {
-  //       expect(res.body).toEqual([{
-  //         _id: expect.any(String),
-  //         id: expect.any(String),
-  //         title: 'great title',
-  //         studio: {
-  //           _id: studio._id.toString(),
-  //           name: studio.name, 
-  //           id: studio.id
-  //         },
-  //         released: 1994,
-  //         __v: 0
-  //       }]);
-  //     });
-  // });
+  it('gets all films', async() => {
+    const films = await getFilms();
+
+    return request(app)
+      .get('/api/v1/films')
+      .then(res => {
+        films.forEach(film => {
+          delete film.cast;
+          expect(res.body).toContainEqual({ ...film, studio: expect.any(Object) });
+        });
+      });
+  });
 
   // it('gets a film by id', () => {
   //   return request(app)
