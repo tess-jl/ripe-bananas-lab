@@ -7,6 +7,8 @@ const mongoose = require('mongoose');
 const Film = require('../lib/models/Film');
 const Studio = require('../lib/models/Studio');
 const Actor = require('../lib/models/Actor');
+const Review = require('../lib/models/Review');
+const Reviewer = require('../lib/models/Reviewer');
 
 describe('film routes', () => {
   beforeAll(() => {
@@ -20,6 +22,8 @@ describe('film routes', () => {
   let film;
   let studio;
   let actor;
+  let review;
+  let reviewer;
   beforeEach(async() => {
 
     studio = await Studio
@@ -40,6 +44,20 @@ describe('film routes', () => {
         cast: [
           { actor: actor._id }
         ]
+      });
+
+    reviewer = await Reviewer
+      .create({
+        name: 'name', 
+        company: 'companyName'
+      });
+
+    review = await Review
+      .create({
+        rating: 5,
+        review: 'meh',
+        reviewer: reviewer._id, 
+        film: film._id
       });
   });
 
@@ -94,7 +112,35 @@ describe('film routes', () => {
       });
   });
 
+  it('gets a film by id', () => {
+    return request(app)
+      .get(`/api/v1/films/${film._id}`)
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: film._id.toString(),
+          id: expect.any(String),
+          title: film.title,
+          released: film.released,
+          studio: studio._id.toString(),
+          cast: [{
+            _id: expect.any(String),
+            actor: actor._id.toString() 
+          }],
+          reviews: [{
+            _id: review._id.toString(),
+            rating: review.rating, 
+            review: review.review,
+            reviewer: {
+              _id: reviewer._id.toString(), 
+              name: reviewer.name
+            }
+          }],
+          __v: 0
+        });
+      });
+  });
 
 
-  
+
+
 });

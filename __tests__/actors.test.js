@@ -56,7 +56,6 @@ describe('app routes', () => {
       });
   });
 
-
   it('gets an actor by id', async() => {
     const testActor = await Actor.create({
       name: 'actor name'
