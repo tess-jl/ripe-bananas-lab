@@ -2,7 +2,9 @@ require('dotenv').config();
 
 const request = require('supertest');
 const app = require('../lib/app');
-const { getReview, getReviews, getFilm, getReviewer } = require('../lib/helpers/data-helpers');
+const { getReview, getFilm, getReviewer } = require('../lib/helpers/data-helpers');
+const chance = require('chance').Chance();
+const Review = require('../lib/models/Review');
 
 
 describe('reviewer routes', () => {
@@ -31,26 +33,23 @@ describe('reviewer routes', () => {
       });
   });
 
-  // it('gets all reviewers', async() => {
-  //   const reviewers = await Reviewer.create([
-  //     { name: 'name1', company: 'company1' },
-  //     { name: 'name2', company: 'company2' },
-  //     { name: 'name3', company: 'company3' },
-  //   ]);
-  //   return request(app)
-  //     .get('/api/v1/reviewers')
-  //     .then(res => {
-  //       reviewers.forEach(reviewer => {
-  //         expect(res.body).toContainEqual({
-  //           _id: reviewer._id.toString(),
-  //           id: expect.any(String),
-  //           name: reviewer.name, 
-  //           company: reviewer.company, 
-  //           __v: 0
-  //         });
-  //       });
-  //     });
-  // });
+  it('gets a limit of 100 reviews when there are more than 100 reviews', async() => {
+    const reviewer = await getReviewer();
+    const film = await getFilm();
+
+    await Review.create([...Array(101)].map(() => ({
+      rating: 1, 
+      reviewer: reviewer._id, 
+      review: chance.string({ length: 140 }),
+      film: film._id
+    })));
+
+    return request(app)
+      .get('/api/v1/reviews')
+      .then(res => {
+        expect(res.body).toHaveLength(100);
+      });
+  });
 
   it('deletes a review', async() => {
     const reviewToDelete = await getReview();
